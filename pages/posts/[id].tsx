@@ -28,7 +28,7 @@ const FirstPost = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query: { id } }) => {
   const res = await fetch(`https://api.github.com/repos/vercel/next.js/issues/${id}`);
-  const json = await    res.json();
+  const json = await res.json();
 
   return {
     props: json,

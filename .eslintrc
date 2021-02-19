@@ -16,12 +16,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "max-len": [
-      "error",
-      100,
-      2,
-      { "ignoreUrls": true, "ignoreComments": true }
-    ],
+    "max-len": ["error", 100, 2, { "ignoreUrls": true, "ignoreComments": true }],
     "no-console": "error",
     "no-alert": "error",
     "prettier/prettier": ["error"],
@@ -32,9 +27,7 @@
       }
     ],
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/ban-ts-ignore": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/interface-name-prefix": "warn",
     "@typescript-eslint/no-use-before-define": "warn",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-empty-function": "off",
@@ -55,6 +48,7 @@
     "no-else-return": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
-    "jsx-a11y/mouse-events-have-key-events": "off"
+    "jsx-a11y/mouse-events-have-key-events": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }

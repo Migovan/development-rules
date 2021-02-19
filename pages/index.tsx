@@ -5,15 +5,14 @@ const Home = () => {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>DR</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      {/* <main>
         <Link href="/posts/[id]" as={`/posts/${12}`}>
           <a> this page!</a>
         </Link>
-      </main>
-      <footer></footer>
+      </main> */}
     </div>
   );
 };
