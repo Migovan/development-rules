@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components";
 
 export interface DefaultTheme {
   colors: {
-    turquoise: string;
+    green: string;
+    lightGreen: string;
     pureWhite: string;
   };
   fontSizes: {
@@ -15,12 +16,13 @@ export interface DefaultTheme {
 
 export const theme: DefaultTheme = {
   colors: {
-    turquoise: "#3aafaa",
+    green: "#285452",
+    lightGreen: "#28545294",
     pureWhite: "#feff",
   },
   fontSizes: {
-    small: "1em",
-    medium: "2em",
+    small: "1.5em",
+    medium: "2.5em",
     large: "3em",
   },
 };
