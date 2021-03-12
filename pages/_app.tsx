@@ -13,6 +13,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Header />
       <Container>
         <Tabs />
+        {/* <hr style={{ border: 0, margin: "15 0", height: 1 }} /> */}
         <Component {...pageProps} />
       </Container>
       <GlobalStyles />

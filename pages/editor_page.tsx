@@ -9,7 +9,6 @@ class Editor extends React.Component {
     const RedactorSSRSafe = dynamic(import("../components/SandboxEditor/SandboxEditor"), {
       ssr: false,
     });
-
     return <RedactorSSRSafe />;
   }
 }

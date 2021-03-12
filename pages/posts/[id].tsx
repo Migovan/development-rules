@@ -4,7 +4,6 @@ import Head from "next/head";
 import { GetServerSideProps } from "next";
 
 const FirstPost = (props) => {
-  // console.log("props:", props);
   return (
     <>
       <Head>

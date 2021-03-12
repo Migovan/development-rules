@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { DefaultTheme } from "../../common-styles/theme";
 
 interface Props {
   isActive: boolean;
+  theme: DefaultTheme;
 }
 
 export const Wrapper = styled.div`
@@ -11,7 +13,7 @@ export const Wrapper = styled.div`
 export const ItemTab = styled.div`
   margin-right: 30px;
   cursor: pointer;
-  color: ${(props: any) => {
+  color: ${(props: Props) => {
     const {
       isActive,
       theme: {
@@ -20,7 +22,7 @@ export const ItemTab = styled.div`
     } = props;
     return isActive ? green : lightGreen;
   }};
-  border-bottom: ${(props: any) => {
+  border-bottom: ${(props: Props) => {
     const {
       isActive,
       theme: {
@@ -31,7 +33,7 @@ export const ItemTab = styled.div`
   }};
 
   &:hover {
-    color: ${(props) => props.theme.colors.green};
+    color: ${(props: Props) => props.theme.colors.green};
     border-bottom: ${(props) => `1.5px solid ${props.theme.colors.lightGreen}`};
   }
 `;
