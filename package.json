@@ -25,6 +25,7 @@
     "react-editor-js": "^1.9.0",
     "react-i18next": "^11.8.7",
     "react-modal": "^3.12.1",
+    "react-telegram-login": "^1.1.2",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
