@@ -6,6 +6,10 @@ const GlobalStyles = createGlobalStyle`
  .codex-editor {
     margin-top: 10px;
  }
+
+ .avatar {
+      border-radius: 50%;
+    }
 `;
 
 export default GlobalStyles;

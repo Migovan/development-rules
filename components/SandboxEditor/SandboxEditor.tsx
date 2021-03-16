@@ -12,7 +12,7 @@ const Redactor = () => {
     const savedData = await instanceRef.current.save();
     setData(savedData);
   }
-  console.log("datda:", data);
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div style={{ width: "650px" }}>

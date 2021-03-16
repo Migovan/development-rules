@@ -1,12 +1,14 @@
+import { useState, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Feeds from "../components/Feeds/Feeds";
-import TelegramLoginButton from "react-telegram-login";
+import UserDataContext from "../components/Context/user-data";
+import redirect from "nextjs-redirect";
+
+const Redirect = redirect("/login");
 
 const Home = () => {
-  const handleTelegramResponse = (response) => {
-    console.log(response);
-  };
+  const { userData } = useContext(UserDataContext);
 
   return (
     <div className="container">
@@ -14,8 +16,7 @@ const Home = () => {
         <title>Development rules</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Feeds />
-      <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="developmentrules_bot" />
+      {userData.id ? <Feeds /> : <Redirect />}
       {/* <main>
         <Link href="/posts/[id]" as={`/posts/${12}`}>
           <a> this page!</a>
