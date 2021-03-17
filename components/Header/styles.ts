@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 
 export const StyledHeader = styled.header`
   padding: 0 50px;
@@ -18,5 +18,11 @@ export const Logo = styled.div`
 
 export const UserIcon = styled(UserOutlined)`
   color: ${(props) => props.theme.colors.pureWhite};
-  font-size: 1.3em;
+  font-size: 1em;
+`;
+
+export const LogoutIcon = styled(LogoutOutlined)`
+  color: ${(props) => props.theme.colors.pureWhite};
+  font-size: 1em;
+  margin-left: 5px;
 `;
