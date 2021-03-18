@@ -8,13 +8,13 @@ export default {
         level: 2,
       },
     },
-    {
-      type: "paragraph",
-      data: {
-        text: "",
-        level: 2,
-      },
-    },
+    // {
+    //   type: "paragraph",
+    //   data: {
+    //     text: "",
+    //     level: 2,
+    //   },
+    // },
     // {
     //   type: "header",
     //   data: {
