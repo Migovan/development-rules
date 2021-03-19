@@ -4,10 +4,11 @@ import Link from "next/link";
 import Feeds from "../components/Feeds/Feeds";
 import UserDataContext from "../components/Context/user-data";
 import redirect from "nextjs-redirect";
+import { InferGetStaticPropsType } from "next";
 
 const Redirect = redirect("/login");
 
-const Home = () => {
+const Home = ({ aricles }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { userData } = useContext(UserDataContext);
 
   return (
@@ -16,7 +17,7 @@ const Home = () => {
         <title>Development rules</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {userData.id ? <Feeds /> : <Redirect />}
+      {userData.id ? <Feeds aricles={aricles} /> : <Redirect />}
       {/* <main>
         <Link href="/posts/[id]" as={`/posts/${12}`}>
           <a> this page!</a>
@@ -25,5 +26,16 @@ const Home = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:8081/api/articles");
+  const aricles = await res.json();
+
+  return {
+    props: {
+      aricles,
+    },
+  };
+}
 
 export default Home;

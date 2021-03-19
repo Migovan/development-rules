@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import EditorJs from "react-editor-js";
 import tools from "./tools";
 import initial_data from "./initial_data";
+import { sendArticle } from "../../ api/request";
 
 const Redactor = () => {
   const [data, setData] = useState(initial_data);
@@ -40,7 +41,13 @@ const Redactor = () => {
           console.log(block);
           break;
       }
+
       setHtmlData(html);
+    });
+    sendArticle("/api/articles", {
+      authorId: "480270423",
+      content: html,
+      // id: "480270423",
     });
   }
 
@@ -58,7 +65,7 @@ const Redactor = () => {
       <button style={{ width: "100px" }} onClick={handleSave}>
         save
       </button>
-      {htmlData && <div dangerouslySetInnerHTML={{ __html: htmlData }} />}
+      {/* {htmlData && <div dangerouslySetInnerHTML={{ __html: htmlData }} />} */}
     </div>
   );
 };
