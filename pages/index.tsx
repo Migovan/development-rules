@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Feeds from "../components/Feeds/Feeds";
+import Articles from "../components/Articles/Articles";
 import UserDataContext from "../components/Context/user-data";
 import redirect from "nextjs-redirect";
 import { InferGetStaticPropsType } from "next";
 
 const Redirect = redirect("/login");
 
-const Home = ({ aricles }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({ ariclesData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { userData } = useContext(UserDataContext);
 
   return (
@@ -17,7 +17,7 @@ const Home = ({ aricles }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <title>Development rules</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {userData.id ? <Feeds aricles={aricles} /> : <Redirect />}
+      {userData.id ? <Articles ariclesData={ariclesData} /> : <Redirect />}
       {/* <main>
         <Link href="/posts/[id]" as={`/posts/${12}`}>
           <a> this page!</a>
@@ -29,11 +29,11 @@ const Home = ({ aricles }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
 export async function getStaticProps() {
   const res = await fetch("http://localhost:8081/api/articles");
-  const aricles = await res.json();
+  const ariclesData = await res.json();
 
   return {
     props: {
-      aricles,
+      ariclesData,
     },
   };
 }
