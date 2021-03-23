@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const TabNames = [
   { name: "Лента", id: "1", link: "/" },
-  { name: "Мои публикации", id: "2", link: "/my-feeds" },
-  { name: "Написать", id: "3", link: "/sandbox" },
+  { name: "Мои публикации", id: "2", link: "/my-articles" },
+  { name: "Написать", id: "3", link: "/text-editor" },
 ];
 
 const Tabs = () => {

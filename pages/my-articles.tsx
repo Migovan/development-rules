@@ -1,5 +1,5 @@
 import Head from "next/head";
-import MyFeedsComponent from "../components/MyFeeds/MyFeedsComponent";
+import MyArticles from "../components/MyArticles/MyArticles";
 
 const Home = () => {
   return (
@@ -8,7 +8,7 @@ const Home = () => {
         <title>My Feeds</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MyFeedsComponent />
+      <MyArticles />
     </div>
   );
 };

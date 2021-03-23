@@ -16,7 +16,6 @@ export const deleteArticle = async (url, id) => {
   try {
     await fetch(`http://localhost:8081${url}${id}`, {
       method: "DELETE",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },

@@ -4,7 +4,7 @@ import tools from "./tools";
 import initial_data from "./initial_data";
 import { sendArticle } from "../../ api/request";
 
-const Redactor = () => {
+const TextEditor = () => {
   const [data, setData] = useState(initial_data);
   const [htmlData, setHtmlData] = useState("");
 
@@ -44,14 +44,14 @@ const Redactor = () => {
 
       setHtmlData(html);
     });
+
     sendArticle("/api/articles", {
       authorId: "480270423",
       content: html,
-      // id: "480270423",
     });
   }
 
-  console.log("htmlData: ", htmlData);
+  console.log("data: ", data);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -65,9 +65,8 @@ const Redactor = () => {
       <button style={{ width: "100px" }} onClick={handleSave}>
         save
       </button>
-      {/* {htmlData && <div dangerouslySetInnerHTML={{ __html: htmlData }} />} */}
     </div>
   );
 };
 
-export default Redactor;
+export default TextEditor;
