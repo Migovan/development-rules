@@ -2,11 +2,13 @@ import React, { useState, useRef } from "react";
 import EditorJs from "react-editor-js";
 import tools from "./tools";
 import initial_data from "./initial_data";
+import { Buttons, TextArea } from "./styles";
 import { sendArticle } from "../../ api/request";
+import Button from "../common/Button/Button";
 
 const TextEditor = () => {
   const [data, setData] = useState(initial_data);
-  const [htmlData, setHtmlData] = useState("");
+  const [isShowOtherSettings, setIsShowOtherSettings] = useState(false);
 
   const instanceRef = useRef(null);
 
@@ -41,8 +43,6 @@ const TextEditor = () => {
           console.log(block);
           break;
       }
-
-      setHtmlData(html);
     });
 
     sendArticle("/api/articles", {
@@ -50,21 +50,40 @@ const TextEditor = () => {
       content: html,
     });
   }
-
-  console.log("data: ", data);
-
+  console.log("dafta: ", data.blocks);
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <div style={{ width: "650px" }}>
-        <EditorJs
-          data={data}
-          tools={tools}
-          instanceRef={(instance) => (instanceRef.current = instance)}
-        />
-      </div>
-      <button style={{ width: "100px" }} onClick={handleSave}>
-        save
-      </button>
+      {!isShowOtherSettings ? (
+        <>
+          <div style={{ width: "650px" }}>
+            <EditorJs
+              data={data}
+              tools={tools}
+              instanceRef={(instance) => (instanceRef.current = instance)}
+            />
+          </div>
+          <Button onClick={() => setIsShowOtherSettings(!isShowOtherSettings)} width="200px">
+            Перейти к настройкам
+          </Button>
+        </>
+      ) : (
+        <div style={{ width: "450px" }}>
+          <TextArea placeholder="Добавьте описание к вашей статьей..." />
+          <Buttons>
+            <Button
+              onClick={() => {
+                setIsShowOtherSettings(!isShowOtherSettings);
+              }}
+              width="200px"
+            >
+              Вернуться назад
+            </Button>
+            <Button onClick={handleSave} width="200px">
+              Опубликовать статью
+            </Button>
+          </Buttons>
+        </div>
+      )}
     </div>
   );
 };

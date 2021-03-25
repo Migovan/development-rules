@@ -54,11 +54,11 @@ const Header = () => {
           }}
         />
       </UserBlock>
-      {!userData.id && (
+      {/* {!userData.id && (
         <span style={{ display: "none" }}>
           <Redirect />
         </span>
-      )}
+      )} */}
     </StyledHeader>
   );
 };
