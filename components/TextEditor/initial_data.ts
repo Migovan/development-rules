@@ -1,20 +1,21 @@
 export default {
   time: 1556098174501,
   blocks: [
-    {
-      type: "header",
-      data: {
-        text: "",
-        level: 2,
-      },
-    },
     // {
-    //   type: "paragraph",
+    //   type: "header",
     //   data: {
     //     text: "",
     //     level: 2,
     //   },
     // },
+    {
+      type: "paragraph",
+      // autofocus: true,
+      data: {
+        text: "",
+        level: 2,
+      },
+    },
     // {
     //   type: "header",
     //   data: {

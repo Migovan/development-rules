@@ -32,6 +32,8 @@ const Header = () => {
     }
   }, []);
 
+  console.log("userData:", userData);
+
   return (
     <StyledHeader>
       <Logo>Development Rules</Logo>

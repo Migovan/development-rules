@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 
 export const StyledHeader = styled.header`
-  padding: 0 50px;
+  padding: 0 100px;
   height: 80px;
   display: flex;
   align-items: center;

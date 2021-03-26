@@ -9,19 +9,16 @@ export default {
   header: {
     class: Header,
     config: {
-      placeholder: "Заголовок...",
       levels: [1, 2, 3, 4],
       defaultLevel: 2,
     },
     inlineToolbar: true,
   },
   paragraph: {
-    placeholder: "Параграф...",
     class: Paragraph,
     inlineToolbar: true,
   },
   list: {
-    placeholder: "Список...",
     class: List,
     inlineToolbar: true,
   },

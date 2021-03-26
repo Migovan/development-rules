@@ -27,7 +27,8 @@ export const StyledButton = styled.button`
     return lightGreen;
   }};
   &:hover {
-    color: ${(props: Props) => props.theme.colors.green};
+    color: ${(props: Props) => props.theme.colors.pureWhite};
     border: ${(props: Props) => `1px solid  ${props.theme.colors.green}`};
+    background-color: ${(props: Props) => props.theme.colors.green};
   }
 `;

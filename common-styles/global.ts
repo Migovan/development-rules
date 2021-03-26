@@ -5,11 +5,11 @@ const GlobalStyles = createGlobalStyle`
  ${normalize}
  
  .codex-editor {
-   min-height: 450px;
-    border: 1px solid #e4d8d8;
-    border-radius: 5px;
-    padding: 0 20px;
-    margin: 30px 0 50px;
+   min-height: 300px;
+    /* border: 1px solid #e4d8d8;
+    border-radius: 5px; */
+    /* padding: 0 20px; */
+    /* margin: 30px 0 50px; */
  }
 
 .codex-editor__redactor {
@@ -24,9 +24,9 @@ const GlobalStyles = createGlobalStyle`
 color: #70768485 !important;
 }
 
-textarea::placeholder {
+/* textarea::placeholder {
     color: #70768485;
-  }
+  } */
 `;
 
 export default GlobalStyles;

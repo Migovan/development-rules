@@ -2,13 +2,14 @@ import React, { useState, useRef } from "react";
 import EditorJs from "react-editor-js";
 import tools from "./tools";
 import initial_data from "./initial_data";
-import { Buttons, TextArea } from "./styles";
+import { Buttons, TextArea, Editor, StyledInput } from "./styles";
 import { sendArticle } from "../../ api/request";
 import Button from "../common/Button/Button";
 
 const TextEditor = () => {
   const [data, setData] = useState(initial_data);
-  const [isShowOtherSettings, setIsShowOtherSettings] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const instanceRef = useRef(null);
 
@@ -45,45 +46,49 @@ const TextEditor = () => {
       }
     });
 
-    sendArticle("/api/articles", {
+    const articleData = {
       authorId: "480270423",
-      content: html,
-    });
+      content: JSON.stringify(savedData),
+      description,
+      title,
+    };
+
+    console.log("articleData: ", articleData);
+    sendArticle("/api/articles", articleData);
+    setTitle("");
+    instanceRef.current.clear();
+    setData(initial_data);
+    setDescription("");
   }
-  console.log("dafta: ", data.blocks);
+  // console.log("dafta: ", data.blocks);
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {!isShowOtherSettings ? (
-        <>
-          <div style={{ width: "650px" }}>
+      <div>
+        <div style={{ width: "650px" }}>
+          <Editor>
+            <StyledInput
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Заголовок..."
+            />
             <EditorJs
               data={data}
               tools={tools}
               instanceRef={(instance) => (instanceRef.current = instance)}
             />
-          </div>
-          <Button onClick={() => setIsShowOtherSettings(!isShowOtherSettings)} width="200px">
-            Перейти к настройкам
-          </Button>
-        </>
-      ) : (
-        <div style={{ width: "450px" }}>
-          <TextArea placeholder="Добавьте описание к вашей статьей..." />
-          <Buttons>
-            <Button
-              onClick={() => {
-                setIsShowOtherSettings(!isShowOtherSettings);
-              }}
-              width="200px"
-            >
-              Вернуться назад
-            </Button>
-            <Button onClick={handleSave} width="200px">
-              Опубликовать статью
-            </Button>
-          </Buttons>
+          </Editor>
+          <TextArea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Добавьте описание к вашей статьей..."
+          />
         </div>
-      )}
+        {/* <hr /> */}
+        <Button onClick={handleSave} width="200px">
+          Опубликовать статью
+        </Button>
+      </div>
     </div>
   );
 };
