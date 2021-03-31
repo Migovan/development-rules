@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Wrapper, NameWithDate, Title, Text } from "./styles";
-import { getArticles, deleteArticle } from "../../ api/request";
+import { getArticles, deleteArticle, editArticle } from "../../ api/request";
 import { format } from "date-fns";
 import { es, ru } from "date-fns/locale";
+import { Console } from "node:console";
 
-const AriclesPreview = ({ isMyArticle }: any) => {
+const ArticlesPreview = ({ isMyArticle }: any) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -16,30 +17,28 @@ const AriclesPreview = ({ isMyArticle }: any) => {
 
   const content = () => {
     return data.map((previewData) => {
-      const { id, date, title, description } = previewData;
+      const { id, date, title, description, content } = previewData;
       const dateFormat = format(new Date(date), "MM/dd/yyyy");
-      console.log("previewData:", previewData);
+      console.log("content:", content);
 
       return (
-        <Link key={id} href="/posts/[id]" as={`/posts/${id}`}>
-          <a>
-            <Wrapper>
+        <Wrapper key={id}>
+          <Link href="/article/[id]" as={`/article/${id}`}>
+            <a>
               <NameWithDate>
                 <div>{`Artem Migovan ${dateFormat}`}</div>
               </NameWithDate>
               <Title>{title}</Title>
               <div>{description}</div>
-              {isMyArticle && (
-                <>
-                  <button onClick={() => deleteArticle("/api/articles/", id, setData)}>
-                    delete
-                  </button>
-                  {/* <button onClick={() => deleteArticle("/api/articles/", id)}>edit</button> */}
-                </>
-              )}
-            </Wrapper>
-          </a>
-        </Link>
+            </a>
+          </Link>
+          {isMyArticle && (
+            <>
+              <button onClick={() => deleteArticle("/api/articles/", id, setData)}>delete</button>
+              {/* <button onClick={() => editArticle("/api/articles/", id)}>edit</button> */}
+            </>
+          )}
+        </Wrapper>
       );
     });
   };
@@ -55,4 +54,4 @@ const AriclesPreview = ({ isMyArticle }: any) => {
   );
 };
 
-export default AriclesPreview;
+export default ArticlesPreview;

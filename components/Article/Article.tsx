@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import { GetServerSideProps } from "next";
-
-const isEmpty = (obj) => {
-  for (let key in obj) {
-    return false;
-  }
-  return true;
-};
+import TextEditor from "../../components/TextEditor/TextEditor";
 
 const parseHtml = (content, setData) => {
   let html = "";
@@ -45,38 +38,45 @@ const parseHtml = (content, setData) => {
   setData(html);
 };
 
-const FirstPost = (props) => {
+const Article = ({ articleData }) => {
   const [data, setData] = useState("");
-  const { content, title } = props;
+  const [isEdit, setIsEdit] = useState(false);
+
+  const { content, title, date, id, description } = articleData;
+
+  const articleDataEdit = {
+    authorId: "480270423",
+    date,
+    content: content,
+    id,
+    description,
+    title,
+  };
+
   useEffect(() => {
     parseHtml(JSON.parse(content), setData);
   }, []);
 
-  console.log("props:", props);
-  return (
-    <>
-      {data && (
+  const article = () => {
+    return (
+      data && (
         <>
           <h1>{title}</h1> <div dangerouslySetInnerHTML={{ __html: data }} />
+          <button
+            onClick={() => {
+              setIsEdit(!isEdit);
+              console.log("articleData:", articleDataEdit);
+            }}
+          >
+            edit
+          </button>
         </>
-      )}
-      {/* <Image
-        src="/images/profile.jpg" // Route of the image file
-        height={400} // Desired size with correct aspect ratio
-        width={400} // Desired size with correct aspect ratio
-        alt="Your Name"
-      />  */}
-    </>
-  );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ query: { id } }) => {
-  const res = await fetch(`http://localhost:8081/api/articles/${id}`);
-  const json = await res.json();
-
-  return {
-    props: json,
+      )
+    );
   };
+
+  console.log("articleData:", articleData);
+  return <>{isEdit ? <TextEditor isEdit={true} editingArticleData={articleData} /> : article()}</>;
 };
 
-export default FirstPost;
+export default Article;

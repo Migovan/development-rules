@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import Head from "next/head";
-import Link from "next/link";
-import AriclesPreview from "../components/AriclesPreview/AriclesPreview";
+import ArticlesPreview from "../components/ArticlesPreview/ArticlesPreview";
 import UserDataContext from "../components/Context/user-data";
 import redirect from "nextjs-redirect";
 
@@ -16,7 +15,7 @@ const Home = () => {
         <title>Development rules</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AriclesPreview isMyArticle />
+      <ArticlesPreview isMyArticle />
     </div>
   );
 };

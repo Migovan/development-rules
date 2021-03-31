@@ -3,13 +3,15 @@ import EditorJs from "react-editor-js";
 import tools from "./tools";
 import initial_data from "./initial_data";
 import { Buttons, TextArea, Editor, StyledInput } from "./styles";
-import { sendArticle } from "../../ api/request";
+import { sendArticle, editArticle } from "../../ api/request";
 import Button from "../common/Button/Button";
 
-const TextEditor = () => {
-  const [data, setData] = useState(initial_data);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+const TextEditor = ({ editingArticleData, isEdit }) => {
+  const editContent = isEdit && JSON.parse(editingArticleData.content);
+
+  const [data, setData] = useState(editContent || initial_data);
+  const [title, setTitle] = useState(editingArticleData?.title || "");
+  const [description, setDescription] = useState(editingArticleData?.description || "");
 
   const instanceRef = useRef(null);
 
@@ -53,13 +55,21 @@ const TextEditor = () => {
       title,
     };
 
-    sendArticle("/api/articles", articleData);
+    const editedArticleData = {
+      authorId: "480270423",
+      content: JSON.stringify(savedData),
+      description,
+      title,
+      id: editingArticleData && editingArticleData.id,
+      date: editingArticleData && editingArticleData.date,
+    };
+
+    isEdit ? editArticle(editedArticleData) : sendArticle("/api/articles", articleData);
     setTitle("");
     instanceRef.current.clear();
     setData(initial_data);
     setDescription("");
   }
-  // console.log("dafta: ", data.blocks);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
