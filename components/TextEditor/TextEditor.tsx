@@ -53,7 +53,6 @@ const TextEditor = () => {
       title,
     };
 
-    console.log("articleData: ", articleData);
     sendArticle("/api/articles", articleData);
     setTitle("");
     instanceRef.current.clear();
