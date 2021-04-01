@@ -23,6 +23,7 @@ export const TextArea = styled.textarea`
   border-radius: 5px;
   margin-bottom: 50px;
   padding: 20px;
+  line-height: 1.6em;
 
   ::placeholder {
     color: #70768485;

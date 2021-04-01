@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Head from "next/head";
 import TextEditor from "../../components/TextEditor/TextEditor";
+import { Wrapper, EditIcon } from "./styles";
 
 const parseHtml = (content, setData) => {
   let html = "";
@@ -42,16 +40,7 @@ const Article = ({ articleData }) => {
   const [data, setData] = useState("");
   const [isEdit, setIsEdit] = useState(false);
 
-  const { content, title, date, id, description } = articleData;
-
-  const articleDataEdit = {
-    authorId: "480270423",
-    date,
-    content: content,
-    id,
-    description,
-    title,
-  };
+  const { content, title, date } = articleData;
 
   useEffect(() => {
     parseHtml(JSON.parse(content), setData);
@@ -60,22 +49,18 @@ const Article = ({ articleData }) => {
   const article = () => {
     return (
       data && (
-        <>
-          <h1>{title}</h1> <div dangerouslySetInnerHTML={{ __html: data }} />
-          <button
-            onClick={() => {
-              setIsEdit(!isEdit);
-              console.log("articleData:", articleDataEdit);
-            }}
-          >
-            edit
-          </button>
-        </>
+        <div style={{ display: "flex" }}>
+          <Wrapper>
+            <h1>{title}</h1>
+            <div style={{ lineHeight: "1.6em" }} dangerouslySetInnerHTML={{ __html: data }} />
+            {/* <button onClick={() => setIsEdit(!isEdit)}>edit</button> */}
+          </Wrapper>
+          <EditIcon onClick={() => setIsEdit(!isEdit)} />
+        </div>
       )
     );
   };
 
-  console.log("articleData:", articleData);
   return <>{isEdit ? <TextEditor isEdit={true} editingArticleData={articleData} /> : article()}</>;
 };
 

@@ -6,6 +6,10 @@ export interface DefaultTheme {
     green: string;
     lightGreen: string;
     pureWhite: string;
+    gray: string;
+    lightGray: string;
+    black: string;
+    deepBlack: string;
   };
   fontSizes: {
     small: string;
@@ -19,6 +23,10 @@ export const theme: DefaultTheme = {
     green: "#285452",
     lightGreen: "#28545294",
     pureWhite: "#feff",
+    gray: "#75818c",
+    lightGray: "#75818c9c",
+    black: "#333",
+    deepBlack: "#222",
   },
   fontSizes: {
     small: "1.5em",

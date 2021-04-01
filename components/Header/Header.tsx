@@ -39,7 +39,7 @@ const Header = () => {
         {first_name ? (
           <>
             {photo_url && (
-              <Image className="avatar" src={photo_url} height={35} width={35} alt="Your Name" />
+              <Image className="avatar" src={photo_url} height={35} width={35} alt="Your" />
             )}
             <UserName>{`${first_name} `}</UserName>
             {last_name && <UserName>{last_name}</UserName>}

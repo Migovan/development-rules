@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import { DefaultTheme } from "../../../common-styles/theme";
 
 interface Props {
