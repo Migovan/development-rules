@@ -14,22 +14,24 @@ export const sendArticle = async (url, data) => {
   }
 };
 
-export const getArticles = async (url, setData) => {
+export const getArticles = async (data, setData) => {
+  setData({ ...data, isLoading: true });
   try {
-    const res = await fetch(`http://localhost:8081${url}`, {
+    const res = await fetch("http://localhost:8081/api/articles/intro", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
     const articlesPreview = await res.json();
-    await setData(articlesPreview);
+    await setData({ articlesPreview, isLoading: false });
   } catch (e) {
     return console.error(e);
   }
 };
 
-export const getArticle = async (id, setArticleData) => {
+export const getArticle = async (id, data, setArticleData) => {
+  setArticleData({ ...data, isLoading: true });
   try {
     const res = await fetch(`http://localhost:8081/api/articles/${id}`, {
       method: "GET",
@@ -39,7 +41,7 @@ export const getArticle = async (id, setArticleData) => {
     });
     const article = await res.json();
     const articleHtml = await parseHtml(JSON.parse(article?.content));
-    await setArticleData({ data: article, html: articleHtml });
+    await setArticleData({ articleData: article, html: articleHtml, isLoading: false });
   } catch (e) {
     return console.error(e);
   }

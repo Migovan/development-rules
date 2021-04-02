@@ -27,6 +27,7 @@ export const TextArea = styled.textarea`
 
   ::placeholder {
     color: #70768485;
+    font-size: 17px;
   }
   &:focus {
     outline: none;

@@ -38,6 +38,7 @@ export const DeleteIcon = styled(DeleteOutlined)`
   color: ${(props) => props.theme.colors.lightGray};
   margin: 30px 10px;
   font-size: 1.3em;
+  height: 20px;
 `;
 
 export const ArrowRightIcon = styled(ArrowRightOutlined)`

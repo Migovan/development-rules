@@ -10,6 +10,7 @@ export const EditIcon = styled(EditOutlined)`
   color: ${(props) => props.theme.colors.lightGray};
   margin-top: 15px;
   font-size: 1.5em;
+  height: 20px;
   &:focus {
     outline: none;
   }

@@ -3,40 +3,39 @@ import TextEditor from "../../components/TextEditor/TextEditor";
 import { Wrapper, EditIcon } from "./styles";
 import InfoAboutArticle from "../common/InfoAboutArticle/InfoAboutArticle";
 import UserDataContext from "../../components/Context/user-data";
-import { parseHtml } from "../../utils";
 import { getArticle } from "../../ api/request";
+import LoaderWrapper from "../../components/common/hoc/LoaderWrapper/LoaderWrapper";
+
 import { useRouter } from "next/router";
 
 const Article = () => {
-  const [articleData, setArticleData] = useState<any>({ data: {}, html: "" });
+  const [data, setData] = useState<any>({ articleData: {}, html: "", isLoading: false });
   const [isEdit, setIsEdit] = useState(false);
   const { userData } = useContext(UserDataContext);
   const router = useRouter();
   const articleId = router.query.id;
   const photoUrl = userData?.photo_url;
+  const isLoading = data.isLoading;
 
   useEffect(() => {
-    getArticle(articleId, setArticleData);
-  }, [articleData?.data?.title]);
+    getArticle(articleId, data, setData);
+  }, [data?.articleData?.title]);
 
   const article = () => {
-    return (
-      articleData?.data?.content && (
-        <div style={{ marginTop: "30px" }}>
-          <InfoAboutArticle photoUrl={photoUrl} date={articleData?.data?.date} />
-          <div style={{ display: "flex" }}>
-            <Wrapper>
-              <h1>{articleData?.data?.title}</h1>
-              <div
-                style={{ lineHeight: "1.6em" }}
-                dangerouslySetInnerHTML={{ __html: articleData?.html }}
-              />
-              <hr style={{ marginTop: "40px" }} />
-            </Wrapper>
-            <EditIcon onClick={() => setIsEdit(!isEdit)} />
-          </div>
+    return data?.articleData?.content ? (
+      <div style={{ marginTop: "30px" }}>
+        <InfoAboutArticle photoUrl={photoUrl} date={data?.articleData?.date} />
+        <div style={{ display: "flex" }}>
+          <Wrapper>
+            <h1>{data?.articleData?.title}</h1>
+            <div style={{ lineHeight: "1.6em" }} dangerouslySetInnerHTML={{ __html: data?.html }} />
+            <hr style={{ marginTop: "40px" }} />
+          </Wrapper>
+          <EditIcon onClick={() => setIsEdit(!isEdit)} />
         </div>
-      )
+      </div>
+    ) : (
+      <></>
     );
   };
 
@@ -46,11 +45,11 @@ const Article = () => {
         <TextEditor
           isEdit={isEdit}
           setIsEdit={setIsEdit}
-          editingArticleData={articleData}
-          setEditingArticleData={setArticleData}
+          editingArticleData={data}
+          setEditingArticleData={setData}
         />
       ) : (
-        article()
+        <LoaderWrapper isLoading={isLoading}>{article()}</LoaderWrapper>
       )}
     </>
   );
