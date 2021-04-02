@@ -10,25 +10,8 @@ export const Wrapper = styled.div`
   border: 1px solid #e4d8d8;
   border-radius: 5px;
   width: 55%;
-  margin: 30px 0 30px;
+  margin-bottom: 30px;
   padding: 20px;
-`;
-
-export const UserInfo = styled.div`
-  display: flex;
-  align-items: center;
-
-  time {
-    font-size: 14px;
-    color: ${(props) => props.theme.colors.gray};
-  }
-`;
-
-export const Name = styled.div`
-  font-weight: bold;
-  margin: 0px 7px;
-  font-size: 16px;
-  color: ${(props) => props.theme.colors.green};
 `;
 
 export const Title = styled.h2`

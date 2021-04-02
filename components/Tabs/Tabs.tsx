@@ -22,7 +22,7 @@ const Tabs = () => {
         return (
           <Link href={link} key={name}>
             <ItemTab
-              isActive={checkedItem === id || pathname === link}
+              isActive={(checkedItem === id || pathname === link) && pathname !== "/article/[id]"}
               onClick={() => setCheckedItem(item.id)}
             >
               {item.name}

@@ -50,7 +50,7 @@ const TextEditor = ({ editingArticleData, isEdit }) => {
             <StyledInput
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Заголовок..."
+              placeholder="Здесь вы можете написать что угодно..."
             />
             <EditorJs
               data={data}
@@ -64,7 +64,6 @@ const TextEditor = ({ editingArticleData, isEdit }) => {
             placeholder="Добавьте описание к вашей статьей..."
           />
         </div>
-        {/* <hr /> */}
         <Button onClick={handleSave} width="200px">
           Опубликовать статью
         </Button>

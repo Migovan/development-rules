@@ -8,6 +8,8 @@ interface Props {
 
 export const Wrapper = styled.div`
   display: flex;
+  height: 25px;
+  margin-bottom: 30px;
 `;
 
 export const ItemTab = styled.div`

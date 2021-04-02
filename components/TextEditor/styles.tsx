@@ -35,7 +35,7 @@ export const TextArea = styled.textarea`
 
 export const Editor = styled.div`
   padding: 20px;
-  margin: 30px 0 30px;
+  margin-bottom: 30px;
   border: 1px solid #e4d8d8;
   border-radius: 5px;
 `;
