@@ -64,7 +64,7 @@ const TextEditor = ({ editingArticleData, isEdit }) => {
             placeholder="Добавьте описание к вашей статьей..."
           />
         </div>
-        <Button onClick={handleSave} width="200px">
+        <Button onClick={handleSave} width="200px" disabled={title && description ? false : true}>
           Опубликовать статью
         </Button>
       </div>

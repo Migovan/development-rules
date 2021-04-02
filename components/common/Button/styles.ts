@@ -4,6 +4,7 @@ import { DefaultTheme } from "../../../common-styles/theme";
 interface Props {
   width?: number;
   theme: DefaultTheme;
+  disabled?: boolean;
 }
 
 export const StyledButton = styled.button`
@@ -17,14 +18,14 @@ export const StyledButton = styled.button`
   height: 36px;
   color: ${(props: Props) => {
     const {
-      //   isActive,
+      disabled,
       theme: {
         colors: { green, lightGreen },
       },
     } = props;
-    // return isActive ? green : lightGreen;
-    return lightGreen;
+    return disabled ? lightGreen : green;
   }};
+  pointer-events: ${(props: Props) => (props.disabled ? "none" : "auto")};
   &:hover {
     color: ${(props: Props) => props.theme.colors.pureWhite};
     border: ${(props: Props) => `1px solid  ${props.theme.colors.green}`};
