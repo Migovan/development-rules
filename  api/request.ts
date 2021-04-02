@@ -47,9 +47,10 @@ export const getArticle = async (id, data, setArticleData) => {
   }
 };
 
-export const deleteArticle = async (url, id, setData) => {
+export const deleteArticle = async (id, data, setData) => {
+  setData({ ...data, isLoading: true });
   try {
-    await fetch(`http://localhost:8081${url}${id}`, {
+    await fetch(`http://localhost:8081/api/articles/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -57,8 +58,8 @@ export const deleteArticle = async (url, id, setData) => {
     });
     //рефакторинг!
     const res = await fetch(`http://localhost:8081/api/articles/intro`);
-    const ae = await res.json();
-    await setData(ae);
+    const articlesPreview = await res.json();
+    await setData({ articlesPreview, isLoading: false });
   } catch (e) {
     return console.error(e);
   }

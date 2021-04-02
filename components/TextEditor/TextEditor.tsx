@@ -7,11 +7,13 @@ import { sendArticle, editArticle } from "../../ api/request";
 import Button from "../common/Button/Button";
 
 const TextEditor = ({ editingArticleData, setEditingArticleData, isEdit, setIsEdit }) => {
-  const editContent = isEdit && JSON.parse(editingArticleData?.data?.content);
+  const editContent = isEdit && JSON.parse(editingArticleData?.articleData?.content);
 
   const [data, setData] = useState(editContent || initial_data);
-  const [title, setTitle] = useState(editingArticleData?.data?.title || "");
-  const [description, setDescription] = useState(editingArticleData?.data?.description || "");
+  const [title, setTitle] = useState(editingArticleData?.articleData?.title || "");
+  const [description, setDescription] = useState(
+    editingArticleData?.articleData?.description || "",
+  );
 
   const instanceRef = useRef(null);
 

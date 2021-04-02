@@ -19,10 +19,10 @@ const ArticlesPreview = ({ isMyArticle }: any) => {
   }, []);
 
   const content = () => {
-    return articlesPreview.map((articlePreview) => {
-      const { id, date, title, description } = articlePreview;
+    if (articlesPreview && articlesPreview.length > 0) {
+      return articlesPreview.map((articlePreview) => {
+        const { id, date, title, description } = articlePreview;
 
-      if (articlesPreview.length > 0) {
         return (
           <div style={{ display: "flex" }} key={id}>
             <Wrapper>
@@ -38,15 +38,13 @@ const ArticlesPreview = ({ isMyArticle }: any) => {
                 </a>
               </Link>
             </Wrapper>
-            {isMyArticle && (
-              <DeleteIcon onClick={() => deleteArticle("/api/articles/", id, setData)} />
-            )}
+            {isMyArticle && <DeleteIcon onClick={() => deleteArticle(id, data, setData)} />}
           </div>
         );
-      } else {
-        return <Text>{isMyArticle ? "Создай свою первую статью!" : "Пока ничего нет..."}</Text>;
-      }
-    });
+      });
+    } else {
+      return <Text>{isMyArticle ? "Создай свою первую статью!" : "Пока ничего нет..."}</Text>;
+    }
   };
 
   return (
