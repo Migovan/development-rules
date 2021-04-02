@@ -1,6 +1,6 @@
 import { format, isToday, isYesterday } from "date-fns";
 
-export const parseHtml = (content, setData) => {
+export const parseHtml = (content) => {
   let html = "";
   content?.blocks?.length > 0 &&
     content.blocks.forEach(function (block) {
@@ -31,7 +31,7 @@ export const parseHtml = (content, setData) => {
       }
     });
 
-  setData(html);
+  return html;
 };
 
 export const formattedDate = (date) => {

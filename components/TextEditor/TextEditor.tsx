@@ -2,16 +2,16 @@ import React, { useState, useRef } from "react";
 import EditorJs from "react-editor-js";
 import tools from "./tools";
 import initial_data from "./initial_data";
-import { Buttons, TextArea, Editor, StyledInput } from "./styles";
+import { TextArea, Editor, StyledInput } from "./styles";
 import { sendArticle, editArticle } from "../../ api/request";
 import Button from "../common/Button/Button";
 
-const TextEditor = ({ editingArticleData, isEdit }) => {
-  const editContent = isEdit && JSON.parse(editingArticleData.content);
+const TextEditor = ({ editingArticleData, setEditingArticleData, isEdit, setIsEdit }) => {
+  const editContent = isEdit && JSON.parse(editingArticleData?.data?.content);
 
   const [data, setData] = useState(editContent || initial_data);
-  const [title, setTitle] = useState(editingArticleData?.title || "");
-  const [description, setDescription] = useState(editingArticleData?.description || "");
+  const [title, setTitle] = useState(editingArticleData?.data?.title || "");
+  const [description, setDescription] = useState(editingArticleData?.data?.description || "");
 
   const instanceRef = useRef(null);
 
@@ -31,11 +31,17 @@ const TextEditor = ({ editingArticleData, isEdit }) => {
       content: JSON.stringify(savedData),
       description,
       title,
-      id: editingArticleData && editingArticleData.id,
-      date: editingArticleData && editingArticleData.date,
+      id: editingArticleData?.data?.id,
+      date: editingArticleData?.data?.date,
     };
 
-    isEdit ? editArticle(editedArticleData) : sendArticle("/api/articles", articleData);
+    if (isEdit) {
+      setIsEdit(!isEdit);
+      editArticle(editedArticleData, setEditingArticleData, editingArticleData?.data?.id);
+    } else {
+      sendArticle("/api/articles", articleData);
+    }
+
     setTitle("");
     instanceRef.current.clear();
     setData(initial_data);
@@ -65,7 +71,7 @@ const TextEditor = ({ editingArticleData, isEdit }) => {
           />
         </div>
         <Button onClick={handleSave} width="200px" disabled={title && description ? false : true}>
-          Опубликовать статью
+          {isEdit ? "Сохранить изменения" : "Опубликовать статью"}
         </Button>
       </div>
     </div>
