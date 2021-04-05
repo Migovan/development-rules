@@ -29,19 +29,17 @@ const TextEditor = ({ editingArticleData, setEditingArticleData, isEdit, setIsEd
     };
 
     const editedArticleData = {
-      authorId: "480270423",
       content: JSON.stringify(savedData),
       description,
       title,
-      id: editingArticleData?.data?.id,
-      date: editingArticleData?.data?.date,
+      id: editingArticleData?.articleData?.id,
     };
 
     if (isEdit) {
       setIsEdit(!isEdit);
-      editArticle(editedArticleData, setEditingArticleData, editingArticleData?.data?.id);
+      editArticle(editingArticleData?.articleData?.id, editedArticleData, setEditingArticleData);
     } else {
-      sendArticle("/api/articles", articleData);
+      sendArticle(articleData);
     }
 
     setTitle("");

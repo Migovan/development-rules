@@ -3,7 +3,7 @@ import UserDataContext from "../../components/Context/user-data";
 import Link from "next/link";
 import InfoAboutArticle from "../common/InfoAboutArticle/InfoAboutArticle";
 import { Wrapper, Title, Text, Description, DeleteIcon, ReadMore, ArrowRightIcon } from "./styles";
-import { getArticles, deleteArticle } from "../../ api/request";
+import { getArticlesIntro, deleteArticle } from "../../ api/request";
 import LoaderWrapper from "../../components/common/hoc/LoaderWrapper/LoaderWrapper";
 
 const ArticlesPreview = ({ isMyArticle }: any) => {
@@ -15,7 +15,7 @@ const ArticlesPreview = ({ isMyArticle }: any) => {
   const isLoading = data.isLoading;
 
   useEffect(() => {
-    getArticles(data, setData);
+    getArticlesIntro(data, setData);
   }, []);
 
   const content = () => {

@@ -25,7 +25,9 @@ export const parseHtml = (content) => {
           html += "</ul>";
           break;
         default:
+          // eslint-disable-next-line
           console.log("Unknown block type", block.type);
+          // eslint-disable-next-line
           console.log(block);
           break;
       }
