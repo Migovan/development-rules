@@ -6,9 +6,13 @@ import { formattedDate } from "../../../utils";
 const InfoAboutArticle = ({ photoUrl, date }) => {
   return (
     <Wrapper>
-      {photoUrl && <Image className="avatar" src={photoUrl} height={30} width={30} alt="Your" />}
-      <Name>migovan</Name>
-      <time>{formattedDate(date)}</time>
+      {photoUrl && date && (
+        <>
+          <Image className="avatar" src={photoUrl} height={30} width={30} alt="Your" />
+          <Name>migovan</Name>
+          <time>{formattedDate(date)}</time>
+        </>
+      )}
     </Wrapper>
   );
 };

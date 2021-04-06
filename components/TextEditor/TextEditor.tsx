@@ -1,80 +1,85 @@
-import React, { useState, useRef } from "react";
+import React, { FC, useState, useRef, useContext } from "react";
+import UserDataContext from "../../components/Context/user-data";
 import EditorJs from "react-editor-js";
 import tools from "./tools";
 import initial_data from "./initial_data";
-import { TextArea, Editor, StyledInput } from "./styles";
+import { TextArea, Editor, StyledInput, Wrapper } from "./styles";
 import { sendArticle, editArticle } from "../../ api/request";
 import Button from "../common/Button/Button";
 
-const TextEditor = ({ editingArticleData, setEditingArticleData, isEdit, setIsEdit }) => {
-  const editContent = isEdit && JSON.parse(editingArticleData?.articleData?.content);
+interface Props {
+  isEdit?: boolean;
+  editingArticleData?: any;
+  setIsEdit?: (isEdit) => void;
+  setEditingArticleData?: (editingArticleData) => void;
+}
+
+const TextEditor: FC<Props> = ({
+  editingArticleData,
+  setEditingArticleData,
+  isEdit,
+  setIsEdit,
+}) => {
+  const instanceRef = useRef(null);
+  const { userData } = useContext(UserDataContext);
+
+  const authorId = userData?.id;
+  const articleData = editingArticleData?.articleData;
+  const id = articleData?.id;
+  const editContent = isEdit && JSON.parse(articleData?.content);
 
   const [data, setData] = useState(editContent || initial_data);
-  const [title, setTitle] = useState(editingArticleData?.articleData?.title || "");
-  const [description, setDescription] = useState(
-    editingArticleData?.articleData?.description || "",
-  );
-
-  const instanceRef = useRef(null);
+  const [title, setTitle] = useState(articleData?.title || "");
+  const [description, setDescription] = useState(articleData?.description || "");
 
   async function handleSave() {
     const savedData = await instanceRef.current.save();
     setData(savedData);
 
-    const articleData = {
-      authorId: "480270423",
-      content: JSON.stringify(savedData),
-      description,
+    const newArticleData = {
+      id,
       title,
-    };
-
-    const editedArticleData = {
-      content: JSON.stringify(savedData),
       description,
-      title,
-      id: editingArticleData?.articleData?.id,
+      authorId,
+      content: JSON.stringify(savedData),
     };
 
     if (isEdit) {
       setIsEdit(!isEdit);
-      editArticle(editingArticleData?.articleData?.id, editedArticleData, setEditingArticleData);
+      editArticle(id, newArticleData, setEditingArticleData);
     } else {
-      sendArticle(articleData);
+      sendArticle(newArticleData);
     }
 
     setTitle("");
-    instanceRef.current.clear();
-    setData(initial_data);
     setDescription("");
+    setData(initial_data);
+    instanceRef.current.clear();
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div>
-        <div style={{ width: "650px" }}>
-          <Editor>
-            <StyledInput
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Здесь вы можете написать что угодно..."
-            />
-            <EditorJs
-              data={data}
-              tools={tools}
-              instanceRef={(instance) => (instanceRef.current = instance)}
-            />
-          </Editor>
-          <TextArea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Добавьте описание к вашей статьей..."
-          />
-        </div>
-        <Button onClick={handleSave} width="200px" disabled={title && description ? false : true}>
-          {isEdit ? "Сохранить изменения" : "Опубликовать статью"}
-        </Button>
-      </div>
-    </div>
+    <Wrapper>
+      <Editor>
+        <StyledInput
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Здесь вы можете написать что угодно..."
+        />
+        <EditorJs
+          data={data}
+          tools={tools}
+          instanceRef={(instance) => (instanceRef.current = instance)}
+        />
+      </Editor>
+      <TextArea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Добавьте описание к вашей статьей..."
+      />
+      <Button onClick={handleSave} width="200px" disabled={title && description ? false : true}>
+        {isEdit ? "Сохранить изменения" : "Опубликовать статью"}
+      </Button>
+    </Wrapper>
   );
 };
 

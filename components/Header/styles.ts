@@ -29,3 +29,15 @@ export const LogoutIcon = styled(LogoutOutlined)`
   font-size: 1em;
   margin-left: 5px;
 `;
+
+export const UserName = styled.div`
+  font-family: "Amatic SC", cursive;
+  margin-left: 10px;
+  color: ${(props) => props.theme.colors.pureWhite};
+  font-size: 1.3em;
+`;
+
+export const UserBlock = styled.div`
+  display: flex;
+  align-items: center;
+`;

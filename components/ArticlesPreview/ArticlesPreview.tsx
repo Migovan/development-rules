@@ -1,18 +1,30 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import UserDataContext from "../../components/Context/user-data";
 import Link from "next/link";
 import InfoAboutArticle from "../common/InfoAboutArticle/InfoAboutArticle";
-import { Wrapper, Title, Text, Description, DeleteIcon, ReadMore, ArrowRightIcon } from "./styles";
+import {
+  Title,
+  Text,
+  Description,
+  DeleteIcon,
+  ReadMore,
+  ArrowRightIcon,
+  StyledLink,
+} from "./styles";
+import { FlexBox } from "../../common-styles/styles";
 import { getArticlesIntro, deleteArticle } from "../../ api/request";
 import LoaderWrapper from "../../components/common/hoc/LoaderWrapper/LoaderWrapper";
 
-const ArticlesPreview = ({ isMyArticle }: any) => {
+interface Props {
+  isMyArticle?: boolean;
+}
+
+const ArticlesPreview: FC<Props> = ({ isMyArticle }) => {
   const [data, setData] = useState({ articlesPreview: [], isLoading: false });
   const { userData } = useContext(UserDataContext);
 
   const photoUrl = userData?.photo_url;
-  const articlesPreview = data.articlesPreview;
-  const isLoading = data.isLoading;
+  const { articlesPreview, isLoading } = data;
 
   useEffect(() => {
     getArticlesIntro(data, setData);
@@ -24,8 +36,8 @@ const ArticlesPreview = ({ isMyArticle }: any) => {
         const { id, date, title, description } = articlePreview;
 
         return (
-          <div style={{ display: "flex" }} key={id}>
-            <Wrapper>
+          <FlexBox key={id}>
+            <StyledLink>
               <Link href="/article/[id]" as={`/article/${id}`}>
                 <a>
                   <InfoAboutArticle photoUrl={photoUrl} date={date} />
@@ -37,9 +49,9 @@ const ArticlesPreview = ({ isMyArticle }: any) => {
                   </ReadMore>
                 </a>
               </Link>
-            </Wrapper>
+            </StyledLink>
             {isMyArticle && <DeleteIcon onClick={() => deleteArticle(id, data, setData)} />}
-          </div>
+          </FlexBox>
         );
       });
     } else {
@@ -47,11 +59,7 @@ const ArticlesPreview = ({ isMyArticle }: any) => {
     }
   };
 
-  return (
-    <>
-      <LoaderWrapper isLoading={isLoading}>{content()}</LoaderWrapper>
-    </>
-  );
+  return <LoaderWrapper isLoading={isLoading}>{content()}</LoaderWrapper>;
 };
 
 export default ArticlesPreview;

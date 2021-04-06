@@ -1,41 +1,46 @@
 import React, { useState, useEffect, useContext } from "react";
 import TextEditor from "../../components/TextEditor/TextEditor";
-import { Wrapper, EditIcon } from "./styles";
+import { StyledArticle, EditIcon } from "./styles";
+import { FlexBox } from "../../common-styles/styles";
 import InfoAboutArticle from "../common/InfoAboutArticle/InfoAboutArticle";
 import UserDataContext from "../../components/Context/user-data";
 import { getArticle } from "../../ api/request";
 import LoaderWrapper from "../../components/common/hoc/LoaderWrapper/LoaderWrapper";
-
 import { useRouter } from "next/router";
 
+interface PropsData {
+  articleData: any;
+  html: string;
+  isLoading: boolean;
+}
+
 const Article = () => {
-  const [data, setData] = useState<any>({ articleData: {}, html: "", isLoading: false });
-  const [isEdit, setIsEdit] = useState(false);
-  const { userData } = useContext(UserDataContext);
   const router = useRouter();
+  const { userData } = useContext(UserDataContext);
+  const [isEdit, setIsEdit] = useState(false);
+  const [data, setData] = useState<PropsData>({ articleData: {}, html: "", isLoading: false });
+
   const articleId = router.query.id;
   const photoUrl = userData?.photo_url;
-  const isLoading = data.isLoading;
+  const { articleData, html, isLoading } = data;
 
   useEffect(() => {
     getArticle(articleId, data, setData);
-  }, [data?.articleData?.title]);
+  }, []);
 
   const article = () => {
-    return data?.articleData?.content ? (
-      <div style={{ marginTop: "30px" }}>
-        <InfoAboutArticle photoUrl={photoUrl} date={data?.articleData?.date} />
-        <div style={{ display: "flex" }}>
-          <Wrapper>
-            <h1>{data?.articleData?.title}</h1>
-            <div style={{ lineHeight: "1.6em" }} dangerouslySetInnerHTML={{ __html: data?.html }} />
-            <hr style={{ marginTop: "40px" }} />
-          </Wrapper>
+    return (
+      <>
+        <InfoAboutArticle photoUrl={photoUrl} date={articleData?.date} />
+        <FlexBox>
+          <StyledArticle>
+            <h1>{articleData?.title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+            <hr />
+          </StyledArticle>
           <EditIcon onClick={() => setIsEdit(!isEdit)} />
-        </div>
-      </div>
-    ) : (
-      <></>
+        </FlexBox>
+      </>
     );
   };
 

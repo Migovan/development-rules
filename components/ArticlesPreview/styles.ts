@@ -14,6 +14,14 @@ export const Wrapper = styled.div`
   padding: 20px;
 `;
 
+export const StyledLink = styled.div`
+  border: 1px solid #e4d8d8;
+  border-radius: 5px;
+  width: 55%;
+  margin-bottom: 30px;
+  padding: 20px;
+`;
+
 export const Title = styled.h2`
   margin: 10px 0 15px;
   color: ${(props) => props.theme.colors.black};

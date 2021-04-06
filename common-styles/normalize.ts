@@ -20,11 +20,29 @@ const normalize = css`
     margin: 0;
   }
 
-  hr {
+  /* hr {
     border: 0;
     height: 0;
     border-top: 1px solid rgb(0 0 0 / 23%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  } */
+
+  hr {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+  }
+  hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
   }
 
   pre {

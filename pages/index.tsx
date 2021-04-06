@@ -6,18 +6,17 @@ import redirect from "nextjs-redirect";
 
 const Redirect = redirect("/login");
 
-const Home = () => {
+const Articles = () => {
   const { userData } = useContext(UserDataContext);
 
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Development rules</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       {userData.id ? <ArticlesPreview /> : <Redirect />}
-    </div>
+    </>
   );
 };
 
-export default Home;
+export default Articles;

@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 
-export const Wrapper = styled.div`
+export const StyledArticle = styled.div`
   width: 55%;
   margin-top: 10px;
+
+  div {
+    line-height: 1.6em;
+  }
+  hr {
+    margin-top: 40px;
+  }
 `;
 
 export const EditIcon = styled(EditOutlined)`
