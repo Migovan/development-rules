@@ -3,7 +3,7 @@ import { DefaultTheme } from "../../common-styles/theme";
 
 interface Props {
   isActive: boolean;
-  theme: DefaultTheme;
+  theme?: DefaultTheme;
 }
 
 export const Wrapper = styled.div`
